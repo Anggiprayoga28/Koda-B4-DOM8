@@ -1,36 +1,44 @@
 let allCharacters = [];
-        
-async function loadAllCharacters() {
-    let page = 1;
-        let hasNext = true;
-            
-    while (hasNext) {
-        const response = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`);
-        const data = await response.json();
-        allCharacters = [...allCharacters, ...data.results];
-        hasNext = data.info.next !== null;
-        page++;
-    }
-            
+
+async function fetchCharacters() {
+  try {
+    const response = await fetch("https://rickandmortyapi.com/api/character");
+    const data = await response.json();
+    allCharacters = data.results;
     displayCharacters(allCharacters);
+  } catch (error) {
+    console.error("Error fetching characters:", error);
+    document.getElementById("characters").innerHTML =
+      '<p class="text-center text-red-600">Error loading characters</p>';
+  }
 }
-        
+
 function displayCharacters(characters) {
-    const container = document.getElementById('characters');
-    container.innerHTML = characters.map(char => `
-        <div class="card">
-            <img src="${char.image}" alt="${char.name}">
-            <h3>${char.name}</h3>
-        </div>
-    `).join('');
+  const charactersContainer = document.getElementById("characters");
+  charactersContainer.innerHTML = characters
+    .map(
+      (character) => `
+                <div class="bg-white border border-gray-300 rounded-lg p-4 text-center">
+                    <img src="${character.image}" alt="${character.name}" class="w-full h-45 object-cover rounded">
+                    <h3 class="mt-2.5 mb-1.5 mx-0 text-gray-800 text-lg font-normal">${character.name}</h3>
+                    <p class="text-gray-600 text-sm">${character.status} - ${character.species}</p>
+                </div>
+            `
+    )
+    .join("");
 }
-        
-document.getElementById('searchInput').addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const filtered = allCharacters.filter(char => 
-        char.name.toLowerCase().includes(searchTerm)
-    );
-    displayCharacters(filtered);
+
+function searchCharacters() {
+  const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+  const filteredCharacters = allCharacters.filter((character) =>
+    character.name.toLowerCase().includes(searchTerm)
+  );
+  displayCharacters(filteredCharacters);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  fetchCharacters();
+  document
+    .getElementById("searchInput")
+    .addEventListener("input", searchCharacters);
 });
-        
-loadAllCharacters();
