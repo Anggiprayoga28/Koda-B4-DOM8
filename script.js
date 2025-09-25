@@ -2,9 +2,10 @@ let allCharacters = [];
 
 async function fetchCharacters() {
   try {
-    const response = await fetch("https://rickandmortyapi.com/api/character");
-    const data = await response.json();
-    allCharacters = data.results;
+    const response = await axios.get(
+      "https://rickandmortyapi.com/api/character"
+    );
+    allCharacters = response.data.results;
     displayCharacters(allCharacters);
   } catch (error) {
     console.error("Error fetching characters:", error);
@@ -18,12 +19,12 @@ function displayCharacters(characters) {
   charactersContainer.innerHTML = characters
     .map(
       (character) => `
-                <div class="bg-white border border-gray-300 rounded-lg p-4 text-center">
-                    <img src="${character.image}" alt="${character.name}" class="w-full h-45 object-cover rounded">
-                    <h3 class="mt-2.5 mb-1.5 mx-0 text-gray-800 text-lg font-normal">${character.name}</h3>
-                    <p class="text-gray-600 text-sm">${character.status} - ${character.species}</p>
-                </div>
-            `
+                        <div class="bg-white border border-gray-300 rounded-lg p-4 text-center">
+                            <img src="${character.image}" alt="${character.name}" class="w-full h-45 object-cover rounded">
+                            <h3 class="mt-2.5 mb-1.5 mx-0 text-gray-800 text-lg font-normal">${character.name}</h3>
+                            <p class="text-gray-600 text-sm">${character.status} - ${character.species}</p>
+                        </div>
+                    `
     )
     .join("");
 }
