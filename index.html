@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rick and Morty Characters</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>
-    <script src="/script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rick and Morty Characters</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script data-main="assets/scripts/main" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
 </head>
 <body class="font-sans bg-gray-100 m-0 p-5">
-    <div class="max-w-6xl mx-auto">
-        <h1 class="text-center text-gray-800 text-3xl font-bold mb-6">Rick and Morty Characters</h1>
-        <input 
-            type="text" 
-            id="searchInput" 
-            autocomplete="off" 
-            placeholder="Cari karakter"
-            class="block mx-auto my-5 px-2.5 py-2.5 w-80 border-2 border-gray-300 rounded text-base focus:outline-none focus:border-blue-500"
-        >
-        <div id="characters" class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-5">
-        </div>
-    </div>
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-center text-gray-800 text-3xl font-bold mb-6">
+      Rick and Morty Characters
+    </h1>
+    <input 
+      type="text" 
+      id="searchInput" 
+      autocomplete="off" 
+      placeholder="Cari karakter"
+      class="block mx-auto my-5 px-2.5 py-2.5 w-80 border-2 border-gray-300 rounded text-base focus:outline-none focus:border-blue-500"
+    >
+    <div id="characters" class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-5"></div>
+  </div>
 </body>
 </html>
